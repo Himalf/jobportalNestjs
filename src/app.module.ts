@@ -9,6 +9,7 @@ import { Skills } from './skills/skills.entity';
 import { UsersService } from './users/users.service';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
+import { Users } from './users/entities/user.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -19,14 +20,14 @@ import { UsersModule } from './users/users.module';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DATABASE,
-      entities: [Skills],
+      entities: [Skills, Users],
       synchronize: true,
     }),
     ResumeModule,
     SkillsModule,
     UsersModule,
   ],
-  providers: [UsersService],
-  controllers: [UsersController],
+  providers: [],
+  controllers: [],
 })
 export class AppModule {}
