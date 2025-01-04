@@ -5,6 +5,11 @@ import { ConfigModule } from '@nestjs/config';
 import { Skills } from './skills/skills.entity';
 import { UsersModule } from './users/users.module';
 import { Users } from './users/entities/user.entity';
+import { ResumeController } from './resume/resume.controller';
+import { ResumeService } from './resume/resume.service';
+import { Resume } from './resume/entities/resume.entities';
+import { ResumeModule } from './resume/resume.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -15,11 +20,12 @@ import { Users } from './users/entities/user.entity';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DATABASE,
-      entities: [Skills, Users],
+      entities: [Skills, Users, Resume],
       synchronize: true,
     }),
     SkillsModule,
     UsersModule,
+    ResumeModule,
   ],
   providers: [],
   controllers: [],
