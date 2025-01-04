@@ -1,15 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ResumeModule } from './resume/resume.module';
-import { SkillsService } from './skills/skills.service';
-import { SkillsController } from './skills/skills.controller';
 import { SkillsModule } from './skills/skills.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { Skills } from './skills/skills.entity';
-import { UsersService } from './users/users.service';
-import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 import { Users } from './users/entities/user.entity';
+import { ResumeModule } from './resume/resume.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
