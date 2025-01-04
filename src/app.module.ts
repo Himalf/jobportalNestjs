@@ -6,6 +6,7 @@ import { SkillsModule } from './skills/skills.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { Skills } from './skills/skills.entity';
+import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -21,6 +22,7 @@ import { Skills } from './skills/skills.entity';
     }),
     ResumeModule,
     SkillsModule,
+    UsersModule,
   ],
 })
 export class AppModule {}
