@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Skills } from './skills.entity';
 import { Repository } from 'typeorm';
-import { createSkillDto } from './dto/skills.dto';
+import { CreateSkillDto } from './dto/skills.dto';
 
 @Injectable()
 export class SkillsService {
@@ -10,7 +10,7 @@ export class SkillsService {
     @InjectRepository(Skills)
     private readonly skillsRepository: Repository<Skills>,
   ) {}
-  async create(createSkillDto: createSkillDto): Promise<Skills> {
+  async create(createSkillDto: CreateSkillDto): Promise<Skills> {
     const skillsData = this.skillsRepository.create(createSkillDto);
     return this.skillsRepository.save(skillsData);
   }
