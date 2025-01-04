@@ -1,4 +1,3 @@
-import { Resume } from 'src/resume/entities/resume.entity';
 import {
   Column,
   CreateDateColumn,
@@ -31,7 +30,4 @@ export class Users {
     onUpdate: 'CURRENT_TIMESTAMP',
   })
   updated_at: Date;
-
-  @OneToMany(() => Resume, (resume) => resume.user)
-  resume: Resume[];
 }
