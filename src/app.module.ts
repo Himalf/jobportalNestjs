@@ -5,6 +5,7 @@ import { SkillsController } from './skills/skills.controller';
 import { SkillsModule } from './skills/skills.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { Skills } from './skills/skills.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -15,7 +16,7 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DATABASE,
-      entities: [],
+      entities: [Skills],
       synchronize: true,
     }),
     ResumeModule,
