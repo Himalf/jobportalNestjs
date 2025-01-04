@@ -6,6 +6,7 @@ import { Skills } from './skills/skills.entity';
 import { UsersModule } from './users/users.module';
 import { Users } from './users/entities/user.entity';
 import { ResumeModule } from './resume/resume.module';
+import { Resume } from './resume/entities/resume.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -16,7 +17,7 @@ import { ResumeModule } from './resume/resume.module';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DATABASE,
-      entities: [Skills, Users],
+      entities: [Skills, Users, Resume],
       synchronize: true,
     }),
     ResumeModule,

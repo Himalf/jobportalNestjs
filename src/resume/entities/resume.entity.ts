@@ -1,23 +1,25 @@
 import { Users } from 'src/users/entities/user.entity';
 import {
-  Column,
-  CreateDateColumn,
   Entity,
-  OneToOne,
+  Column,
   PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class Resume {
   @PrimaryGeneratedColumn()
   resume_id: number;
+
   @Column()
   file_url: string;
-  @OneToOne(() => Users, (resume) => resume.user_id, {
+
+  @ManyToOne(() => Users, (user) => user.resume, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user_id: Users;
+  user: Users;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

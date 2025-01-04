@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { Users } from './entities/user.entity';
 import { CreateUserDto, UpdateUserDto } from './dto/users.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -30,13 +30,10 @@ export class UsersService {
     if (!existingUser) {
       throw new NotFoundException(`User with ID ${user_id} not found`);
     }
-    console.log('Existing User:', existingUser);
-    console.log('Update User DTO:', updateUserDto);
     const userData = this.userRepository.merge(existingUser, updateUserDto);
-    console.log('Merged User Data:', userData);
     return this.userRepository.save(userData);
   }
-  async remove(user_id: number): Promise<void> {
-    await this.userRepository.delete(user_id);
+  async remove(user_id: number): Promise<DeleteResult> {
+    return await this.userRepository.delete(user_id);
   }
 }
