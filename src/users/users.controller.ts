@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateUserDto } from './dto/users.dto';
+import { CreateUserDto, UpdateUserDto } from './dto/users.dto';
 import { UsersService } from './users.service';
 import { ReturningStatementNotSupportedError } from 'typeorm';
 
@@ -20,15 +20,22 @@ export class UsersController {
   }
   @Get('')
   async findAll() {
-    return this.usersService.finaAll();
+    return this.usersService.findAll();
   }
   @Get(':id')
   async findOne(@Param('id') user_id: number) {
     return this.usersService.findOne(user_id);
   }
+  // @Put(':id')
+  // async update(@Param('id') user_id: number, updateUserDto: UpdateUserDto) {
+  //   return this.usersService.update(user_id, updateUserDto);
+  // }
   @Put(':id')
-  async update(@Param('id') user_id: number, createUserDto: CreateUserDto) {
-    return this.usersService.update(user_id, createUserDto);
+  async update(
+    @Param('id') user_id: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return this.usersService.update(user_id, updateUserDto);
   }
   @Delete(':id')
   async remove(@Param('id') user_id: number) {
