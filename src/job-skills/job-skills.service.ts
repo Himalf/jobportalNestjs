@@ -39,16 +39,48 @@ export class JobSkillsService {
     return this.jodSkillRepository.save(jobskillData);
   }
 
-  findAll() {
-    return `This action returns all jobSkills`;
+  findAll(): Promise<JobSkill[]> {
+    return this.jodSkillRepository.find({
+      relations: ['job', 'skills'],
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} jobSkill`;
+  findOne(job_skill_id: number): Promise<JobSkill> {
+    return this.jodSkillRepository.findOne({
+      where: { job_skill_id },
+      relations: ['job', 'skills'],
+    });
   }
 
-  update(id: number, updateJobSkillDto: UpdateJobSkillDto) {
-    return `This action updates a #${id} jobSkill`;
+  async update(
+    job_skill_id: number,
+    updateJobSkillDto: UpdateJobSkillDto,
+  ): Promise<JobSkill> {
+    const jobSkill = await this.jodSkillRepository.findOne({
+      where: { job_skill_id },
+    });
+    if (!jobSkill) {
+      throw new Error('The job Skill id is not found');
+    }
+    const jobs = await this.jobRepository.findOne({
+      where: { job_id: updateJobSkillDto.job_id },
+    });
+    if (!jobs) {
+      throw new Error('The job id is not found');
+    }
+    const skill = await this.skillsRepository.findOne({
+      where: { skill_id: updateJobSkillDto.skill_id },
+    });
+    if (!skill) {
+      throw new Error('The skill is not found');
+    }
+    const updateUserSkillData = this.jodSkillRepository.create({
+      ...jobSkill,
+      ...updateJobSkillDto,
+      job: jobs,
+      skills: skill,
+    });
+    return this.jodSkillRepository.save(updateUserSkillData);
   }
 
   remove(id: number) {
