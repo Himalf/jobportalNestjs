@@ -1,6 +1,17 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { UserSkillsService } from './user_skills.service';
-import { CreateUserSkillsDto } from './dto/user_skills.dto';
+import {
+  CreateUserSkillsDto,
+  updateUserSkillsDto,
+} from './dto/user_skills.dto';
 
 @Controller('user_skills')
 export class UserSkillsController {
@@ -12,5 +23,13 @@ export class UserSkillsController {
   @Get('')
   async findAll() {
     return this.userSkillsService.findAll();
+  }
+  @Get(':id')
+  async findOne(@Param('id') id: number) {
+    return this.userSkillsService.findOne(id);
+  }
+  @Delete(':id')
+  async remove(@Param('id') id: number) {
+    return this.userSkillsService.remove(id);
   }
 }

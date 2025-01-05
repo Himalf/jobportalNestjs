@@ -1,10 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { User_Skill } from './entities/user_skills.entity';
 import { Users } from 'src/users/entities/user.entity';
 import { Skills } from 'src/skills/skills.entity';
-import { CreateUserSkillsDto } from './dto/user_skills.dto';
+import {
+  CreateUserSkillsDto,
+  updateUserSkillsDto,
+} from './dto/user_skills.dto';
 
 @Injectable()
 export class UserSkillsService {
@@ -37,7 +40,17 @@ export class UserSkillsService {
     return this.userSkillRepository.save(userSkill);
   }
 
-  async findAll() {
+  async findAll(): Promise<User_Skill[]> {
     return this.userSkillRepository.find({ relations: ['users', 'skills'] });
+  }
+  async findOne(user_skill_id: number): Promise<User_Skill> {
+    return this.userSkillRepository.findOne({
+      where: { user_skill_id },
+      relations: ['users', 'skills'],
+    });
+  }
+
+  async remove(user_skill_id: number): Promise<DeleteResult> {
+    return this.userSkillRepository.delete(user_skill_id);
   }
 }
