@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { JobSkill } from './entities/job-skill.entity';
 import { Job } from 'src/jobs/entities/job.entity';
 import { Skills } from 'src/skills/skills.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { privateDecrypt } from 'crypto';
 
 @Injectable()
@@ -83,7 +83,7 @@ export class JobSkillsService {
     return this.jodSkillRepository.save(updateUserSkillData);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} jobSkill`;
+  remove(job_skill_id: number): Promise<DeleteResult> {
+    return this.jodSkillRepository.delete(job_skill_id);
   }
 }
