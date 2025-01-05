@@ -4,12 +4,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   Timestamp,
 } from 'typeorm';
 import { employeeType } from '../dto/employee_type.enum';
 import { Status } from '../dto/status.enum';
 import { Users } from 'src/users/entities/user.entity';
+import { JobSkill } from 'src/job-skills/entities/job-skill.entity';
 
 @Entity()
 export class Job {
@@ -34,4 +36,5 @@ export class Job {
   @ManyToOne(() => Users, (user) => user.job)
   @JoinColumn({ name: 'user_id' }) // Ensures the column is named 'user_id'
   users: Users;
+  // @OneToMany(()=>JobSkill,(jobSkill)=>jobSkill.)
 }
