@@ -13,6 +13,7 @@ import { UserSkillsController } from './user_skills/user_skills.controller';
 import { UserSkillsService } from './user_skills/user_skills.service';
 import { UserSkillsModule } from './user_skills/user_skills.module';
 import { User_Skill } from './user_skills/entities/user_skills.entity';
+import { JobsModule } from './jobs/jobs.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { User_Skill } from './user_skills/entities/user_skills.entity';
     UsersModule,
     ResumeModule,
     UserSkillsModule,
+    JobsModule,
   ],
   providers: [],
   controllers: [],
