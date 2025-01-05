@@ -15,6 +15,7 @@ import { UserSkillsModule } from './user_skills/user_skills.module';
 import { User_Skill } from './user_skills/entities/user_skills.entity';
 import { JobsModule } from './jobs/jobs.module';
 import { Job } from './jobs/entities/job.entity';
+import { JobSkillsModule } from './job-skills/job-skills.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { Job } from './jobs/entities/job.entity';
     ResumeModule,
     UserSkillsModule,
     JobsModule,
+    JobSkillsModule,
   ],
   providers: [],
   controllers: [],
