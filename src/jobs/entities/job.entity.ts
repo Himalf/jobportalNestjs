@@ -12,6 +12,7 @@ import { employeeType } from '../dto/employee_type.enum';
 import { Status } from '../dto/status.enum';
 import { Users } from 'src/users/entities/user.entity';
 import { JobSkill } from 'src/job-skills/entities/job-skill.entity';
+import { Application } from 'src/applications/entities/application.entity';
 
 @Entity()
 export class Job {
@@ -38,4 +39,6 @@ export class Job {
   users: Users;
   @OneToMany(() => JobSkill, (jobSkill) => jobSkill.job)
   jobSkill: JobSkill;
+  @OneToMany(() => Application, (application) => application.job)
+  application: Application;
 }
