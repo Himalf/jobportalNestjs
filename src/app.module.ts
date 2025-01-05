@@ -9,6 +9,9 @@ import { ResumeController } from './resume/resume.controller';
 import { ResumeService } from './resume/resume.service';
 import { Resume } from './resume/entities/resume.entities';
 import { ResumeModule } from './resume/resume.module';
+import { UserSkillsController } from './user_skills/user_skills.controller';
+import { UserSkillsService } from './user_skills/user_skills.service';
+import { UserSkillsModule } from './user_skills/user_skills.module';
 
 @Module({
   imports: [
@@ -26,8 +29,9 @@ import { ResumeModule } from './resume/resume.module';
     SkillsModule,
     UsersModule,
     ResumeModule,
+    UserSkillsModule,
   ],
-  providers: [],
-  controllers: [],
+  providers: [UserSkillsService],
+  controllers: [UserSkillsController],
 })
 export class AppModule {}

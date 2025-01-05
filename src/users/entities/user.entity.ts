@@ -1,4 +1,5 @@
 import { Resume } from 'src/resume/entities/resume.entities';
+import { User_Skill } from 'src/user_skills/entities/user_skills.entity';
 import {
   Column,
   CreateDateColumn,
@@ -37,4 +38,9 @@ export class Users {
     onDelete: 'CASCADE',
   })
   resume: Resume[];
+  @OneToMany(() => User_Skill, (user_skill) => user_skill.users, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user_skill: User_Skill[];
 }
