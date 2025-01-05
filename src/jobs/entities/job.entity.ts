@@ -36,5 +36,6 @@ export class Job {
   @ManyToOne(() => Users, (user) => user.job)
   @JoinColumn({ name: 'user_id' }) // Ensures the column is named 'user_id'
   users: Users;
-  // @OneToMany(()=>JobSkill,(jobSkill)=>jobSkill.)
+  @OneToMany(() => JobSkill, (jobSkill) => jobSkill.job)
+  jobSkill: JobSkill;
 }
