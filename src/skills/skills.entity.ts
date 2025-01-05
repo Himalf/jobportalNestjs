@@ -7,6 +7,6 @@ export class Skills {
   skill_id: number;
   @Column()
   skill_name: string;
-  @OneToMany(() => User_Skill, (user_skill) => user_skill.users)
+  @OneToMany(() => User_Skill, (user_skill) => user_skill.skills)
   user_skill: User_Skill[];
 }

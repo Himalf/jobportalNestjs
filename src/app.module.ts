@@ -12,6 +12,7 @@ import { ResumeModule } from './resume/resume.module';
 import { UserSkillsController } from './user_skills/user_skills.controller';
 import { UserSkillsService } from './user_skills/user_skills.service';
 import { UserSkillsModule } from './user_skills/user_skills.module';
+import { User_Skill } from './user_skills/entities/user_skills.entity';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { UserSkillsModule } from './user_skills/user_skills.module';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DATABASE,
-      entities: [Skills, Users, Resume],
+      entities: [Skills, Users, Resume, User_Skill],
       synchronize: true,
     }),
     SkillsModule,
@@ -31,7 +32,7 @@ import { UserSkillsModule } from './user_skills/user_skills.module';
     ResumeModule,
     UserSkillsModule,
   ],
-  providers: [UserSkillsService],
-  controllers: [UserSkillsController],
+  providers: [],
+  controllers: [],
 })
 export class AppModule {}
