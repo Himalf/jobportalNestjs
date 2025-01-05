@@ -36,4 +36,8 @@ export class UserSkillsService {
     });
     return this.userSkillRepository.save(userSkill);
   }
+
+  async findAll() {
+    return this.userSkillRepository.find({ relations: ['users', 'skills'] });
+  }
 }
