@@ -17,6 +17,7 @@ import { JobsModule } from './jobs/jobs.module';
 import { Job } from './jobs/entities/job.entity';
 import { JobSkillsModule } from './job-skills/job-skills.module';
 import { JobSkill } from './job-skills/entities/job-skill.entity';
+import { ApplicationsModule } from './applications/applications.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { JobSkill } from './job-skills/entities/job-skill.entity';
     UserSkillsModule,
     JobsModule,
     JobSkillsModule,
+    ApplicationsModule,
   ],
   providers: [],
   controllers: [],
