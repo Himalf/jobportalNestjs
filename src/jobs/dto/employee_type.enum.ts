@@ -1,4 +1,4 @@
 export enum employeeType {
-  partTime = 'part time',
-  fullTime = 'full time',
+  part_time = 'part_time',
+  full_time = 'full_time',
 }

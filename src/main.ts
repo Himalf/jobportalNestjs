@@ -3,7 +3,13 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true, // This ensures the payload is properly transformed to match the DTO class
+    }),
+  );
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

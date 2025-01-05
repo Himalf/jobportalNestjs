@@ -1,3 +1,4 @@
+import { Job } from 'src/jobs/entities/job.entity';
 import { Resume } from 'src/resume/entities/resume.entities';
 import { User_Skill } from 'src/user_skills/entities/user_skills.entity';
 import {
@@ -43,4 +44,9 @@ export class Users {
     onUpdate: 'CASCADE',
   })
   user_skill: User_Skill[];
+  @OneToMany(() => Job, (job) => job.users, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  job: Job[];
 }

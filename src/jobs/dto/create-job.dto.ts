@@ -1,8 +1,9 @@
-import { IsEnum, IsNumber, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { employeeType } from './employee_type.enum';
 import { Status } from './status.enum';
 export class CreateJobDto {
   @IsNumber()
+  @IsNotEmpty()
   user_id: number;
   @IsString()
   title: string;
@@ -11,7 +12,7 @@ export class CreateJobDto {
   @IsString()
   location: string;
   @IsEnum(employeeType)
-  employement_type: employeeType;
+  employment_type: employeeType;
   @IsString()
   salary_range: string;
   @IsString()

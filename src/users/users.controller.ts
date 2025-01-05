@@ -26,10 +26,7 @@ export class UsersController {
   async findOne(@Param('id') user_id: number) {
     return this.usersService.findOne(user_id);
   }
-  // @Put(':id')
-  // async update(@Param('id') user_id: number, updateUserDto: UpdateUserDto) {
-  //   return this.usersService.update(user_id, updateUserDto);
-  // }
+
   @Put(':id')
   async update(
     @Param('id') user_id: number,

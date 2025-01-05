@@ -14,6 +14,7 @@ import { UserSkillsService } from './user_skills/user_skills.service';
 import { UserSkillsModule } from './user_skills/user_skills.module';
 import { User_Skill } from './user_skills/entities/user_skills.entity';
 import { JobsModule } from './jobs/jobs.module';
+import { Job } from './jobs/entities/job.entity';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { JobsModule } from './jobs/jobs.module';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DATABASE,
-      entities: [Skills, Users, Resume, User_Skill],
+      entities: [Skills, Users, Resume, User_Skill, Job],
       synchronize: true,
     }),
     SkillsModule,
