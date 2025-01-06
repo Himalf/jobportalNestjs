@@ -4,8 +4,6 @@ import { Resume } from './entities/resume.entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateResumeDto, UpdateResumeDto } from './dto/resume.dto';
 import { Users } from 'src/users/entities/user.entity';
-import { privateDecrypt } from 'crypto';
-
 @Injectable()
 export class ResumeService {
   constructor(

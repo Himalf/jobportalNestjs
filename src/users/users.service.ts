@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { DeleteResult, Repository } from 'typeorm';
 import { Users } from './entities/user.entity';
 import { CreateUserDto, UpdateUserDto } from './dto/users.dto';
@@ -44,5 +48,20 @@ export class UsersService {
   // to remove or delete user data by user_id
   async remove(user_id: number): Promise<DeleteResult> {
     return await this.userRepository.delete(user_id);
+  }
+
+  // to find by phone number
+  async findByPhone(phone_number: number): Promise<Users> {
+    return this.userRepository.findOne({ where: { phone_number } });
+  }
+
+  // validateUser
+  async validateUser(phone_number: number, password: string): Promise<Users> {
+    const user = await this.findByPhone(phone_number);
+    if (user && (await bcrypt.compare(password, user.password))) {
+      return user;
+    } else {
+      throw new UnauthorizedException('Invalid credentials');
+    }
   }
 }

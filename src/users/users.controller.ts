@@ -38,4 +38,8 @@ export class UsersController {
   async remove(@Param('id') user_id: number) {
     return this.usersService.remove(user_id);
   }
+  @Get(':phone_number')
+  async findByPhone(@Param('phone_number') phone_number: number) {
+    return this.usersService.findByPhone(phone_number);
+  }
 }

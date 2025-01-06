@@ -22,7 +22,7 @@ export class Users {
   email: string;
   @Column()
   password: string;
-  @Column()
+  @Column({ unique: true })
   phone_number: number;
   @Column()
   role: string;

@@ -19,6 +19,9 @@ import { JobSkillsModule } from './job-skills/job-skills.module';
 import { JobSkill } from './job-skills/entities/job-skill.entity';
 import { ApplicationsModule } from './applications/applications.module';
 import { Application } from './applications/entities/application.entity';
+import { AuthService } from './auth/auth.service';
+import { AuthController } from './auth/auth.controller';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -40,6 +43,7 @@ import { Application } from './applications/entities/application.entity';
     JobsModule,
     JobSkillsModule,
     ApplicationsModule,
+    AuthModule,
   ],
   providers: [],
   controllers: [],
