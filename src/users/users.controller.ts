@@ -6,10 +6,12 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto, UpdateUserDto } from './dto/users.dto';
 import { UsersService } from './users.service';
 import { ReturningStatementNotSupportedError } from 'typeorm';
+import { JwtAuthGuard } from 'common/guards/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -18,6 +20,7 @@ export class UsersController {
   async create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
+  @UseGuards(JwtAuthGuard)
   @Get('')
   async findAll() {
     return this.usersService.findAll();
