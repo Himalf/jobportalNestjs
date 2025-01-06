@@ -18,6 +18,8 @@ export class ApplicationsService {
     @InjectRepository(Job)
     private readonly jobRepository: Repository<Job>,
   ) {}
+
+  // to insert data in application table
   async create(
     createApplicationDto: CreateApplicationDto,
   ): Promise<Application> {
@@ -41,10 +43,12 @@ export class ApplicationsService {
     return this.applicationRepository.save(createApplication);
   }
 
+  //to get all data from application table
   async findAll(): Promise<Application[]> {
     return this.applicationRepository.find({ relations: ['users', 'job'] });
   }
 
+  // to get single data from application table
   async findOne(application_id: number): Promise<Application> {
     return this.applicationRepository.findOne({
       where: { application_id },
@@ -52,6 +56,7 @@ export class ApplicationsService {
     });
   }
 
+  // to update the data from appliation table
   async update(
     application_id: number,
     updateApplicationDto: UpdateApplicationDto,
@@ -83,6 +88,7 @@ export class ApplicationsService {
     return this.applicationRepository.save(updateApplication);
   }
 
+  // to remove or delete a application data based on application_id
   async remove(application_id: number): Promise<DeleteResult> {
     return this.applicationRepository.delete(application_id);
   }

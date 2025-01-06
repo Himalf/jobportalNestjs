@@ -10,6 +10,8 @@ export class UsersService {
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>,
   ) {}
+
+  // to create user data
   async create(createUserDto: CreateUserDto): Promise<Users> {
     const password = createUserDto.password;
     const saltRounds = 10;
@@ -19,12 +21,17 @@ export class UsersService {
     return this.userRepository.save(userData);
   }
 
+  // to get all users data
   async findAll(): Promise<Users[]> {
     return this.userRepository.find();
   }
+
+  // to get single user data
   async findOne(user_id: number): Promise<Users> {
     return this.userRepository.findOneBy({ user_id });
   }
+
+  // to update a user based on user_id
   async update(user_id: number, updateUserDto: UpdateUserDto): Promise<Users> {
     const existingUser = await this.findOne(user_id);
     if (!existingUser) {
@@ -33,6 +40,8 @@ export class UsersService {
     const userData = this.userRepository.merge(existingUser, updateUserDto);
     return this.userRepository.save(userData);
   }
+
+  // to remove or delete user data by user_id
   async remove(user_id: number): Promise<DeleteResult> {
     return await this.userRepository.delete(user_id);
   }
