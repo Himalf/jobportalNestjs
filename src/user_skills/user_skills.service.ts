@@ -16,6 +16,8 @@ export class UserSkillsService {
     private readonly userSkillRepository: Repository<User_Skill>,
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>,
+    @InjectRepository(Skills)
+    private readonly skillsRepository: Repository<Skills>,
   ) {}
 
   async create(createUserSkillsDto: CreateUserSkillsDto): Promise<User_Skill> {
@@ -25,8 +27,15 @@ export class UserSkillsService {
     if (!user) {
       throw new NotFoundException('Users not found');
     }
+    const skill = await this.skillsRepository.findOne({
+      where: { skill_id: createUserSkillsDto.skill_id },
+    });
+    if (!skill) {
+      throw new NotFoundException('Skills not found');
+    }
     const userSkillData = this.userSkillRepository.create({
       users: user,
+      skills: skill,
       ...createUserSkillsDto,
     });
     return this.userSkillRepository.save(userSkillData);
