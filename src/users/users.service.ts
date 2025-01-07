@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { DeleteResult, Repository } from 'typeorm';
 import { Users } from './entities/user.entity';
 import { CreateUserDto, UpdateUserDto } from './dto/users.dto';
@@ -39,10 +35,13 @@ export class UsersService {
   async update(user_id: number, updateUserDto: UpdateUserDto): Promise<Users> {
     const existingUser = await this.findOne(user_id);
     if (!existingUser) {
-      throw new NotFoundException(`User with ID ${user_id} not found`);
+      throw new NotFoundException('The user id is not found');
     }
-    const userData = this.userRepository.merge(existingUser, updateUserDto);
-    return this.userRepository.save(userData);
+    const updateUserData = this.userRepository.create({
+      ...updateUserDto,
+      ...existingUser,
+    });
+    return this.userRepository.save(updateUserData);
   }
 
   // to remove or delete user data by user_id
@@ -53,15 +52,5 @@ export class UsersService {
   // to find by phone number
   async findByPhone(phone_number: number): Promise<Users> {
     return this.userRepository.findOne({ where: { phone_number } });
-  }
-
-  // validateUser
-  async validateUser(phone_number: number, password: string): Promise<Users> {
-    const user = await this.findByPhone(phone_number);
-    if (user && (await bcrypt.compare(password, user.password))) {
-      return user;
-    } else {
-      throw new UnauthorizedException('Invalid credentials');
-    }
   }
 }

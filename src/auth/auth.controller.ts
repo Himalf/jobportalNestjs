@@ -8,8 +8,6 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UsersService } from 'src/users/users.service';
-import { AuthGuard } from '@nestjs/passport';
-import { JwtStrategy } from './jwt.strategy';
 
 @Controller('auth')
 export class AuthController {
