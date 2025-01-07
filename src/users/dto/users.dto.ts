@@ -1,4 +1,12 @@
-import { IsEnum, IsNumber, IsString } from 'class-validator';
+import {
+  IsEnum,
+  IsNumber,
+  IsString,
+  Max,
+  max,
+  Min,
+  min,
+} from 'class-validator';
 import { Roles } from './roles';
 import { PartialType } from '@nestjs/mapped-types';
 export class CreateUserDto {

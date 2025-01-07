@@ -34,11 +34,19 @@ export class Job {
   status: Status;
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
-  @ManyToOne(() => Users, (user) => user.job)
-  @JoinColumn({ name: 'user_id' }) // Ensures the column is named 'user_id'
+  @ManyToOne(() => Users, (user) => user.job, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   users: Users;
-  @OneToMany(() => JobSkill, (jobSkill) => jobSkill.job)
+  @OneToMany(() => JobSkill, (jobSkill) => jobSkill.job, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   jobSkill: JobSkill;
-  @OneToMany(() => Application, (application) => application.job)
+  @OneToMany(() => Application, (application) => application.job, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   application: Application;
 }

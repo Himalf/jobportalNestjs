@@ -14,9 +14,15 @@ import { ApplicationStatus } from '../dto/application-status.enum';
 export class Application {
   @PrimaryGeneratedColumn()
   application_id: number;
-  @ManyToOne(() => Users, (users) => users.application)
+  @ManyToOne(() => Users, (users) => users.application, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   users: Users;
-  @ManyToOne(() => Job, (job) => job.application)
+  @ManyToOne(() => Job, (job) => job.application, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   job: Job;
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   application_date: Date;

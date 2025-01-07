@@ -22,7 +22,7 @@ export class Users {
   email: string;
   @Column()
   password: string;
-  @Column({ unique: true })
+  @Column({ unique: true, type: 'decimal' })
   phone_number: number;
   @Column()
   role: string;
@@ -51,6 +51,9 @@ export class Users {
   })
   job: Job[];
 
-  @OneToMany(() => Application, (application) => application.users)
+  @OneToMany(() => Application, (application) => application.users, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
   application: Application;
 }

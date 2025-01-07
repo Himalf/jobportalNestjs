@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   UseGuards,
@@ -16,7 +17,6 @@ import { JwtAuthGuard } from 'common/guards/jwt-auth.guard';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-  @UseGuards(JwtAuthGuard)
   @Post('')
   async create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
@@ -32,7 +32,7 @@ export class UsersController {
     return this.usersService.findOne(user_id);
   }
   @UseGuards(JwtAuthGuard)
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') user_id: number,
     @Body() updateUserDto: UpdateUserDto,
