@@ -62,29 +62,4 @@ export class JobsService {
   remove(job_id: number): Promise<DeleteResult> {
     return this.jobRepository.delete(job_id);
   }
-
-  // search and filter jobs based on keyword location and
-  async searchJobs(searchParams: {
-    title?: string;
-    description?: string;
-    location?: string;
-  }): Promise<Job[]> {
-    const queryBuilder = this.jobRepository.createQueryBuilder('job');
-    if (searchParams.title) {
-      queryBuilder.andWhere('job.title ILIKE :title', {
-        title: `%${searchParams.title}%`,
-      });
-    }
-    if (searchParams.location) {
-      queryBuilder.andWhere('job.location ILIKE :location', {
-        location: `%${searchParams.location}%`,
-      });
-    }
-    if (searchParams.description) {
-      queryBuilder.andWhere('job.description ILIKE :description', {
-        description: `%${searchParams.description}%`,
-      });
-    }
-    return queryBuilder.getMany();
-  }
 }
