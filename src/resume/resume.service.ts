@@ -43,28 +43,21 @@ export class ResumeService {
     resume_id: number,
     updateResumeDto: UpdateResumeDto,
   ): Promise<Resume> {
-    const existingResume = await this.findOne(resume_id);
-    if (!existingResume) {
-      throw new NotFoundException(`Resume with ID ${resume_id} not found`);
+    const resume = await this.resumeRepository.findOne({
+      where: { resume_id },
+    });
+    if (!resume) {
+      throw new NotFoundException('resume id not found');
     }
-
-    if (updateResumeDto.user_id) {
-      const user = await this.userRepository.findOneBy({
-        user_id: updateResumeDto.user_id,
-      });
-      if (!user) {
-        throw new NotFoundException(
-          `User with ID ${updateResumeDto.user_id} not found`,
-        );
-      }
-      existingResume.user = user;
-    }
-
-    const resumeData = this.resumeRepository.merge(
-      existingResume,
-      updateResumeDto,
-    );
-    return await this.resumeRepository.save(resumeData);
+    const users = await this.userRepository.findOne({
+      where: { user_id: updateResumeDto.user_id },
+    });
+    const updateResumeData = this.resumeRepository.create({
+      user: users,
+      ...resume,
+      ...updateResumeDto,
+    });
+    return this.resumeRepository.save(updateResumeData);
   }
   async remove(resume_id: number): Promise<DeleteResult> {
     return this.resumeRepository.delete(resume_id);
