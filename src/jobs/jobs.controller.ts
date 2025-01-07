@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { JobsService } from './jobs.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
+import { Job } from './entities/job.entity';
 
 @Controller('jobs')
 export class JobsController {
@@ -38,5 +40,14 @@ export class JobsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.jobsService.remove(+id);
+  }
+
+  @Get('search')
+  async searchJobs(
+    @Query('title') title?: string,
+    @Query('location') location?: string,
+    @Query('description') description?: string,
+  ): Promise<Job[]> {
+    return this.jobsService.searchJobs({ title, location, description });
   }
 }
