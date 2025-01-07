@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { SkillsService } from './skills.service';
 import { CreateSkillDto, UpdateSkillDto } from './dto/skills.dto';
-import { BSON } from 'typeorm';
 
 @Controller('skills')
 export class SkillsController {
