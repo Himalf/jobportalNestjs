@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Skills } from './skills.entity';
 import { Repository } from 'typeorm';
-import { CreateSkillDto } from './dto/skills.dto';
+import { CreateSkillDto, UpdateSkillDto } from './dto/skills.dto';
 
 @Injectable()
 export class SkillsService {
@@ -20,5 +20,19 @@ export class SkillsService {
 
   async findOne(skill_id: number): Promise<Skills> {
     return this.skillsRepository.findOneBy({ skill_id });
+  }
+  async update(
+    skill_id: number,
+    updateSkillDto: UpdateSkillDto,
+  ): Promise<Skills> {
+    const skill = await this.skillsRepository.findOne({ where: { skill_id } });
+    if (!skill) {
+      throw new NotFoundException('skill_id not found');
+    }
+    const updateSkillData = this.skillsRepository.create({
+      ...skill,
+      ...updateSkillDto,
+    });
+    return this.skillsRepository.save(updateSkillData);
   }
 }
