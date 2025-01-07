@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   UseGuards,
@@ -15,30 +16,30 @@ import { JwtAuthGuard } from 'common/guards/jwt-auth.guard';
 @Controller('resume')
 export class ResumeController {
   constructor(private readonly resumeService: ResumeService) {}
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post('')
   async create(@Body() createResumeDto: CreateResumeDto) {
     return this.resumeService.create(createResumeDto);
   }
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get('')
   async findAll() {
     return this.resumeService.findAll();
   }
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(@Param() id: number) {
     return this.resumeService.findOne(id);
   }
-  @UseGuards(JwtAuthGuard)
-  @Put(':id')
+  // @UseGuards(JwtAuthGuard)
+  @Patch(':id')
   async update(
     @Body() updateResumeDto: UpdateResumeDto,
     @Param('id') id: number,
   ) {
     return this.resumeService.update(id, updateResumeDto);
   }
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: number) {
     return this.resumeService.remove(id);
