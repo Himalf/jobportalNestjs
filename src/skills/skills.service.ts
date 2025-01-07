@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Skills } from './skills.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateSkillDto, UpdateSkillDto } from './dto/skills.dto';
 
 @Injectable()
@@ -34,5 +34,9 @@ export class SkillsService {
       ...updateSkillDto,
     });
     return this.skillsRepository.save(updateSkillData);
+  }
+
+  async remove(skill_id): Promise<DeleteResult> {
+    return this.skillsRepository.delete(skill_id);
   }
 }

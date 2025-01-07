@@ -1,6 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { SkillsService } from './skills.service';
-import { CreateSkillDto } from './dto/skills.dto';
+import { CreateSkillDto, UpdateSkillDto } from './dto/skills.dto';
+import { BSON } from 'typeorm';
 
 @Controller('skills')
 export class SkillsController {
@@ -16,5 +25,16 @@ export class SkillsController {
   @Get(':id')
   async findOne(skill_id: number) {
     return this.skillsService.findOne(skill_id);
+  }
+  @Patch(':id')
+  async update(
+    @Body() updateSkillDto: UpdateSkillDto,
+    @Param('id') skill_id: number,
+  ) {
+    return this.skillsService.update(skill_id, updateSkillDto);
+  }
+  @Delete(':id')
+  async remove(@Param('id') skill_id: number) {
+    return this.skillsService.remove(skill_id);
   }
 }
